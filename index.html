@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ — احادیث دسته‌بندی‌شده پیامبر(ص) و اهل‌بیت(ع) + اقوال انبیا</title>
+  <link href="https://fonts.googleapis.com/css2?family=Shahrazad:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--glass:rgba(255,255,255,.12);--bd:rgba(255,255,255,.25);--txt:#fff;--g1:#0b3d2b;--g2:#1f8a54;--g3:#35c16b}
+    *{box-sizing:border-box}
+    body{margin:0;color:var(--txt);font-family:'Shahrazad',serif;min-height:100vh;background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(255,255,255,.12), transparent 60%),
+      radial-gradient(1000px 500px at 110% 10%, rgba(255,255,255,.1), transparent 60%),
+      linear-gradient(135deg,var(--g1),var(--g2) 55%,var(--g3))}
+    header{position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.05));border-bottom:1px solid var(--bd)}
+    .nav{max-width:1200px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35)}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap}
+    .tab{padding:6px 12px;border-radius:12px;border:1px solid var(--bd);background:rgba(255,255,255,.08);cursor:pointer}
+    .tab.active{background:#fff;color:#0f5132;font-weight:700}
+    main{max-width:1200px;margin:24px auto;padding:0 16px 64px}
+    .grid{display:grid;gap:12px}
+    @media(min-width:980px){.grid-2{grid-template-columns:1.2fr 1fr}}
+    .card{background:var(--glass);border:1px solid var(--bd);border-radius:20px;padding:18px 16px;margin:12px 0;box-shadow:0 10px 20px rgba(0,0,0,.15)}
+    h1,h2,h3{margin:8px 0 12px}
+    h1{font-size:2rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    h2{font-size:1.5rem}
+    .ayah{font-size:1.15rem;opacity:.95}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    button{font-family:inherit;cursor:pointer;border:1px solid var(--bd);background:#fff;color:#0f5132;border-radius:12px;padding:8px 14px;font-size:1rem}
+    button.ghost{background:transparent;color:#fff}
+    input,select{width:100%;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font-family:inherit;font-size:1rem}
+    input::placeholder{color:rgba(255,255,255,.8)}
+    .list{display:grid;gap:10px}
+    .hadith{line-height:2}
+    .src{opacity:.92;font-size:.95rem;margin-top:6px}
+    .pill{display:inline-block;padding:.18rem .6rem;border:1px solid rgba(255,255,255,.3);border-radius:999px;font-size:.9rem;margin:2px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{padding:6px 10px;border:1px dashed rgba(255,255,255,.4);border-radius:999px;background:rgba(0,0,0,.1);cursor:pointer}
+    .chip.active{background:#fff;color:#0f5132;border-style:solid;font-weight:700}
+    footer{opacity:.9;text-align:center;padding:24px}
+    .highlight{outline:2px dashed rgba(255,255,255,.35);outline-offset:6px}
+    .two-col{display:grid;gap:12px}
+    @media(min-width:800px){.two-col{grid-template-columns:1fr 2fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand"><div class="logo">🕊️</div><div>بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div></div>
+      <div class="tabs">
+        <div class="tab active" data-tab="home">خانه</div>
+        <div class="tab" data-tab="hadiths">احادیث</div>
+        <div class="tab" data-tab="azkar">اذکار هفته</div>
+        <div class="tab" data-tab="about">درباره</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Home -->
+    <section id="home" class="grid grid-2">
+      <div class="card">
+        <h1>حدیث امروز ✨</h1>
+        <div id="today-hadith" class="hadith"></div>
+        <div class="actions">
+          <button id="randomBtn">حدیث تصادفی</button>
+          <button class="ghost" id="copyBtn">کپی متن</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>آیه الهام‌بخش</h2>
+        <div class="ayah">﴿وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ﴾</div>
+        <div class="src">[سوره طلاق، آیه ۳]</div>
+      </div>
+    </section>
+
+    <!-- Hadiths -->
+    <section id="hadiths" style="display:none">
+      <div class="card two-col">
+        <div>
+          <h2 style="margin-bottom:6px">انتخاب دسته</h2>
+          <div class="chips" id="person-chips"></div>
+        </div>
+        <div>
+          <h2 style="margin-bottom:6px">جستجو</h2>
+          <input id="search" placeholder="جستجو در متن/منبع/کلیدواژه…" />
+        </div>
+      </div>
+      <div id="hadith-list" class="list"></div>
+    </section>
+
+    <!-- Azkar -->
+    <section id="azkar" style="display:none">
+      <div class="card">
+        <h2>اذکار پیشنهادی هفته</h2>
+        <div id="azkar-week" class="list"></div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" style="display:none">
+      <div class="card">
+        <h2>درباره</h2>
+        <p style="line-height:2">
+          این نسخهٔ تک‌فایلی شامل «حدیث امروز»، فهرست احادیث با جستجو و دسته‌بندی بر اساس پیامبر اکرم(ص)، ائمه(ع)
+          و نیز "اقوال/حِکَم منسوب به انبیا" است. برای افزودن اقوال و احادیث بیشتر، به آرایهٔ <code>DATA.hadiths</code>
+          در انتهای فایل اضافه کنید. اگر منبع دقیق در دسترس دارید حتماً در فیلد <code>source</code> ذکر کنید.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> — با نیت قربه‌الی‌الله</footer>
+
+  <script>
+    // ====== داده‌ها ======
+    const DATA = {
+      persons: [
+        // انبیا
+        {id:'nabi-adam', name:'حضرت آدم(ع)'},
+        {id:'nabi-idris', name:'حضرت ادریس(ع)'},
+        {id:'nabi-nuh', name:'حضرت نوح(ع)'},
+        {id:'nabi-ibrahim', name:'حضرت ابراهیم(ع)'},
+        {id:'nabi-lut', name:'حضرت لوط(ع)'},
+        {id:'nabi-ismail', name:'حضرت اسماعیل(ع)'},
+        {id:'nabi-ishaq', name:'حضرت اسحاق(ع)'},
+        {id:'nabi-yaqub', name:'حضرت یعقوب(ع)'},
+        {id:'nabi-yusuf', name:'حضرت یوسف(ع)'},
+        {id:'nabi-ayub', name:'حضرت ایوب(ع)'},
+        {id:'nabi-shuayb', name:'حضرت شعیب(ع)'},
+        {id:'nabi-musa', name:'حضرت موسی(ع)'},
+        {id:'nabi-harun', name:'حضرت هارون(ع)'},
+        {id:'nabi-dawud', name:'حضرت داوود(ع)'},
+        {id:'nabi-sulayman', name:'حضرت سلیمان(ع)'},
+        {id:'nabi-ilyas', name:'حضرت الیاس(ع)'},
+        {id:'nabi-al-yasa', name:'حضرت الیسع(ع)'},
+        {id:'nabi-dhul-kifl', name:'حضرت ذوالکفل(ع)'},
+        {id:'nabi-yunus', name:'حضرت یونس(ع)'},
+        {id:'nabi-zakariya', name:'حضرت زکریا(ع)'},
+        {id:'nabi-yahya', name:'حضرت یحیی(ع)'},
+        {id:'nabi-isa', name:'حضرت عیسی(ع)'},
+        // پیامبر خاتم و اهل‌بیت
+        {id:'prophet', name:'پیامبر اکرم ﷺ'},
+        {id:'imam-ali', name:'امیرالمؤمنین علی(ع)'},
+        {id:'imam-hasan', name:'امام حسن مجتبی(ع)'},
+        {id:'imam-husayn', name:'امام حسین(ع)'},
+        {id:'imam-sajjad', name:'امام زین‌العابدین(ع)'},
+        {id:'imam-baqir', name:'امام محمد باقر(ع)'},
+        {id:'imam-sadiq', name:'امام جعفر صادق(ع)'},
+        {id:'imam-kazim', name:'امام موسی کاظم(ع)'},
+        {id:'imam-rida', name:'امام علی بن موسی الرضا(ع)'},
+        {id:'imam-jawad', name:'امام محمد جواد(ع)'},
+        {id:'imam-hadi', name:'امام علی نقی(ع)'},
+        {id:'imam-askari', name:'امام حسن عسکری(ع)'},
+        {id:'imam-mahdi', name:'حضرت ولی‌عصر(عج)'}
+      ],
+
+      hadiths: [
+        // پیامبر اکرم ﷺ
+        {person:'prophet', text:'الإيمانُ معرفةٌ بالقلبِ، وقولٌ باللسانِ، وعملٌ بالأركانِ، وهو نورٌ يقذِفُهُ اللهُ في قلبِ مَن يشاء.', trans:'ایمان شناخت قلبی، گفتار زبانی و کردار اعضاست، و نوری است که خدا در دل هر که بخواهد می‌افکند.', source:'الكافي، ج 2، ص 38', tags:['ایمان','نور']},
+        {person:'prophet', text:'إنَّمَا بُعِثتُ لِأُتَمِّمَ مَکارِمَ الأخلاق.', trans:'همانا من برانگیخته شدم تا مکارم اخلاق را کامل کنم.', source:'الموطّأ / مسند احمد / مستدرک الوسائل', tags:['اخلاق']},
+        {person:'prophet', text:'الدِّينُ النَّصیحَة.', trans:'دین خیرخواهی است.', source:'صحیح مسلم، 55', tags:['نصیحت','اخلاق']},
+        {person:'prophet', text:'الرَّاحِمونَ يرحمُهُمُ الرَّحمنُ، ارحَموا مَن في الأرضِ يرحَمْكم مَن في السَّماءِ.', trans:'مهربانان مورد رحمتِ رحمن‌اند؛ به اهل زمین رحم کنید تا آن‌که در آسمان است بر شما رحم کند.', source:'جامع ترمذی، 1924', tags:['رحمت']},
+
+        // امام علی(ع)
+        {person:'imam-ali', text:'قِیمَةُ كُلِّ امْرِئٍ ما يُحْسِنُهُ.', trans:'ارزش هر انسان به چیزی است که آن را نیکو انجام می‌دهد.', source:'نهج البلاغة، ح 81', tags:['حکمت','ارزش']},
+        {person:'imam-ali', text:'العلمُ سُلطانٌ مَن وجَدَه صالَ به.', trans:'دانش، سلطنت است؛ هر که آن را بیابد بدان توانمند شود.', source:'غرر الحكم، 4334', tags:['علم']},
+        {person:'imam-ali', text:'الصبرُ ظَفَرٌ.', trans:'صبر، پیروزی است.', source:'غرر الحكم، 2587', tags:['صبر']},
+
+        // امام حسن(ع)
+        {person:'imam-hasan', text:'مَن طَلَبَ العِزَّةَ بِغَيرِ طاعةِ الله أذَلَّهُ الله.', trans:'هر که عزت را جز با اطاعت خدا بجوید، خداوند او را خوار گرداند.', source:'تحف العقول، ص 232', tags:['عزت','طاعت']},
+        {person:'imam-hasan', text:'خيرُ المالِ ما وُقيَ به العِرضُ.', trans:'بهترین مال آن است که آبرو با آن حفظ شود.', source:'غرر الحكم (منسوب)', tags:['مال','آبرو']},
+
+        // امام حسین(ع)
+        {person:'imam-husayn', text:'إنَّما خَرَجتُ لِطَلَبِ الإصلاحِ في أُمّةِ جَدّي.', trans:'من برای اصلاح امت جدم خروج کردم.', source:'تاریخ طبری، ج 4', tags:['اصلاح','کربلا']},
+        {person:'imam-husayn', text:'هيهاتَ مِنّا الذِّلّة.', trans:'دوری باد از ما خواری.', source:'لهوف / مقتل الحسین', tags:['عزت']},
+
+        // امام سجاد(ع)
+        {person:'imam-sajjad', text:'ابنُ آدمَ، إنّكَ لا تزالُ بخيرٍ ما كان لك واعظٌ من نفسِك.', trans:'ای فرزند آدم! تا زمانی که نفس تو تو را پند دهد در خیر هستی.', source:'تحف العقول، ص 282', tags:['موعظه']},
+        {person:'imam-sajjad', text:'الدُّنيا سُوقٌ؛ رَبِحَ فيها قومٌ وخَسِرَ آخرون.', trans:'دنیا بازاری است؛ گروهی در آن سود کنند و گروهی زیان.', source:'تحف العقول', tags:['دنیا']},
+
+        // امام باقر(ع)
+        {person:'imam-baqir', text:'أفضلُ العبادةِ عِفَّةُ البطنِ والفَرجِ.', trans:'برترین عبادت، پاکدامنی شکم و دامن است.', source:'الكافي، ج2، ص79', tags:['عبادت','عفت']},
+        {person:'imam-baqir', text:'العِلْمُ حياةُ القلوب.', trans:'علم، زندگی دل‌هاست.', source:'تحف العقول', tags:['علم']},
+
+        // امام صادق(ع)
+        {person:'imam-sadiq', text:'مَن صَدَقَ لِسانُهُ زادَتْ هيبتُهُ.', trans:'هر که زبانش راستگو باشد، هیبتش افزون گردد.', source:'تحف العقول، ص301', tags:['صدق']},
+        {person:'imam-sadiq', text:'الْحِكمَةُ ضالَّةُ المؤمنِ.', trans:'حکمت، گمشدهٔ مؤمن است.', source:'الكافي، ج1، ص27', tags:['حکمت']},
+
+        // امام کاظم(ع)
+        {person:'imam-kazim', text:'إجعلْ نَفْسَكَ ميزانًا بينك وبينَ غيرِك.', trans:'خویشتن را میزان بین خود و دیگران قرار ده.', source:'تحف العقول، ص383', tags:['عدالت']},
+        {person:'imam-kazim', text:'لَيسَ مِنّا مَن لَم يُحاسِبْ نَفسَهُ.', trans:'از ما نیست کسی که نفس خود را محاسبه نکند.', source:'تحف العقول', tags:['محاسبه نفس']},
+
+        // امام رضا(ع)
+        {person:'imam-rida', text:'حُسْنُ الخُلُقِ نِصفُ الدِّينِ.', trans:'خوش‌خُلقی نصف دین است.', source:'عیون أخبار الرضا، ج2، ص24', tags:['اخلاق']},
+        {person:'imam-rida', text:'العقلُ صديقٌ مُصاحِبٌ.', trans:'عقل، دوستی همدم است.', source:'عیون أخبار الرضا', tags:['عقل']},
+
+        // امام جواد(ع)
+        {person:'imam-jawad', text:'ثِمارُ القُلوبِ الحِكمةُ.', trans:'میوهٔ دل‌ها حکمت است.', source:'تحف العقول، ص457', tags:['حکمت']},
+        {person:'imam-jawad', text:'مَن أصغى إلى ناطِقٍ فقد عَبَدهُ...', trans:'هر که به سخنگویی گوش سپارد، او را عبادت کرده است...', source:'تحف العقول', tags:['گوش سپردن','تأثیرپذیری']},
+
+        // امام هادی(ع)
+        {person:'imam-hadi', text:'مَنِ اتَّقى اللهَ يُوقِهِ.', trans:'هر که از خدا پروا کند، خدا نگهش می‌دارد.', source:'تحف العقول', tags:['تقوا']},
+        {person:'imam-hadi', text:'الدُّنيا سوقٌ رَبِحَ فيها قومٌ وخَسِرَ آخرون.', trans:'دنیا بازاری است؛ برخی سود و برخی زیان کنند.', source:'تحف العقول', tags:['دنیا']},
+
+        // امام عسکری(ع)
+        {person:'imam-askari', text:'العِفّةُ جُنّةٌ مِنَ الفقر.', trans:'عفت، سپری در برابر فقر است.', source:'تحف العقول', tags:['عفت']},
+        {person:'imam-askari', text:'مَن وَقَّرَ عالِمًا فقَد وَقَّرَ رَبَّه.', trans:'هر که عالمی را تکریم کند، پروردگارش را تکریم کرده است.', source:'تحف العقول', tags:['علم','تکریم']},
+
+        // امام مهدی(عج)
+        {person:'imam-mahdi', text:'وأكثِروا الدعاءَ بتعجيلِ الفرجِ فإنّ ذلك فرجُكم.', trans:'برای تعجیل فرج بسیار دعا کنید که فرج شما در آن است.', source:'كمال الدين، ج2، ص485', tags:['فرج','دعا']},
+        {person:'imam-mahdi', text:'إنّا غيرُ مُهمِلينَ لمُراعاتِكم...', trans:'ما در رعایت حال شما کوتاهی نمی‌کنیم...', source:'احتجاج طبرسی', tags:['عنایت']},
+
+        // اقوال انبیا
+        {person:'nabi-adam', text:'يا ربِّ، إنّي ظلمتُ نفسي فاغفِرْ لي.', trans:'پروردگارا! من به خود ستم کردم، مرا بیامرز.', source:'اشاره به آیهٔ 23 اعراف', tags:['توبه']},
+        {person:'nabi-idris', text:'الصبرُ مفتاحُ الفرجِ.', trans:'صبر کلید گشایش است.', source:'منسوب در مصادر حکمی', tags:['صبر']},
+        {person:'nabi-nuh', text:'إني لكلِّ تائبٍ مُجيبٌ.', trans:'برای هر توبه‌کاری پاسخ‌گویم.', source:'اشارات تفسیری نوح 10–12', tags:['توبه','دعا']},
+        {person:'nabi-ibrahim', text:'حَسْبي اللهُ.', trans:'خدا مرا بس است.', source:'آل عمران 173', tags:['توکل']},
+        {person:'nabi-lut', text:'لو أنَّ لي بكم قوّةً...', trans:'ای کاش در برابر شما نیرویی داشتم...', source:'هود 80', tags:['غيرت']},
+        {person:'nabi-ismail', text:'سَتَجِدُني إن شاءَ اللهُ من الصابرين.', trans:'ان‌شاءالله مرا از صابران خواهی یافت.', source:'صافات 102', tags:['صبر']},
+        {person:'nabi-ishaq', text:'البِرُّ يرفعُ البلاءَ.', trans:'نیکی، بلا را برطرف می‌کند.', source:'منسوب', tags:['نیکی']},
+        {person:'nabi-yaqub', text:'فصبرٌ جميلٌ.', trans:'پس صبری نیکو.', source:'یوسف 18', tags:['صبر']},
+        {person:'nabi-yusuf', text:'مَعاذَ اللهِ.', trans:'پناه بر خدا!', source:'یوسف 23', tags:['عفت']},
+        {person:'nabi-ayub', text:'إنّي مَسَّنِيَ الضُّرُّ وأنتَ أرحمُ الرّاحمين.', trans:'رنج به من رسیده و تو مهربان‌ترین مهربانانی.', source:'انبیاء 83', tags:['صبر','بلاء']},
+        {person:'nabi-shuayb', text:'إن أريدُ إلّا الإصلاحَ ما استطعتُ.', trans:'نمی‌خواهم جز آنچه توان دارم اصلاح کنم.', source:'هود 88', tags:['اصلاح']},
+        {person:'nabi-musa', text:'رَبِّ اشرَحْ لي صدري.', trans:'پروردگارا! سینه‌ام را گشاده کن.', source:'طه 25', tags:['دعا','شرح صدر']},
+        {person:'nabi-harun', text:'واجعلْ لي وزيرًا من أهلي.', trans:'از خاندانم وزیری برایم قرار ده.', source:'طه 29', tags:['یاری']},
+        {person:'nabi-dawud', text:'هذا عبدٌ أوّاب.', trans:'بنده‌ای بازگشت‌کننده.', source:'ص 30 (اشاره)', tags:['اوبه']},
+        {person:'nabi-sulayman', text:'هذا مِن فضلِ ربّي.', trans:'این از فضل پروردگار من است.', source:'نمل 40', tags:['شکر']},
+        {person:'nabi-ilyas', text:'ألا تتّقونَ؟', trans:'آیا پروا نمی‌کنید؟', source:'صافات 124', tags:['تقوا']},
+        {person:'nabi-al-yasa', text:'اذكروا اللهَ كثيرًا.', trans:'خدا را بسیار یاد کنید.', source:'منسوب', tags:['ذکر']},
+        {person:'nabi-dhul-kifl', text:'كونوا من الصابرينَ.', trans:'از صابران باشید.', source:'انبیاء 85 (اشاره)', tags:['صبر']},
+        {person:'nabi-yunus', text:'لا إلهَ إلّا أنتَ سبحانكَ إنّي كنتُ من الظالمين.', trans:'معبودی جز تو نیست؛ تو منزّهی؛ من از ستمکاران بودم.', source:'انبیاء 87', tags:['توبه','استغفار']},
+        {person:'nabi-zakariya', text:'رَبِّ لا تَذَرني فَردًا.', trans:'پروردگارا! مرا تنها مگذار.', source:'انبیاء 89', tags:['دعا']},
+        {person:'nabi-yahya', text:'يا يحيى خُذِ الكتابَ بقوّةٍ.', trans:'ای یحیی! کتاب را به قوّت بگیر.', source:'مریم 12', tags:['عزم','علم']},
+        {person:'nabi-isa', text:'طوبى للمُتراحِمين.', trans:'خوشا به حال مهربانان.', source:'تحف العقول', tags:['رحمت']},
+        {person:'nabi-isa', text:'الدُّنيا قَنتٌ فاعبُرُوها ولا تعمُرُوها.', trans:'دنیا پلی است؛ از آن بگذرید و آن را آباد نکنید.', source:'تحف العقول', tags:['زهد']}
+      ]
+    };
+
+    // ====== تب‌ها ======
+    document.addEventListener('click', e=>{
+      const t=e.target.closest('.tab'); if(!t) return;
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      document.querySelectorAll('main section').forEach(s=>s.style.display='none');
+      document.getElementById(t.dataset.tab).style.display='';
+      if(t.dataset.tab==='hadiths'){ renderList(currentPerson, document.getElementById('search').value); }
+    });
+
+    // ====== UI ======
+    function hadithToHTML(h){
+      return `<div class="card"><div class="hadith"><div style="font-size:1.15rem">${h.text}</div>${h.trans?`<div style="opacity:.95;margin-top:6px">${h.trans}</div>`:''}</div><div class="src">${h.source?`<span class="pill">منبع: ${h.source}</span>`:''}${h.tags?.length? h.tags.map(t=>`<span class="pill">#${t}</span>`).join(' '):''}</div></div>`;
+    }
+
+    function renderChips(){
+      const wrap=document.getElementById('person-chips');
+      wrap.innerHTML = DATA.persons.map(p=>`<div class="chip" data-id="${p.id}">${p.name}</div>`).join('');
+      wrap.addEventListener('click', e=>{
+        const c=e.target.closest('.chip'); if(!c) return;
+        document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+        c.classList.add('active');
+        currentPerson=c.dataset.id;
+        renderList(currentPerson, document.getElementById('search').value);
+      });
+      const first = wrap.querySelector('[data-id="prophet"]') || wrap.firstElementChild;
+      if(first){ first.classList.add('active'); currentPerson=first.dataset.id; }
+    }
+
+    function renderList(personId, filter=''){
+      const q=(filter||'').toLowerCase();
+      let items = DATA.hadiths.slice();
+      if(personId) items = items.filter(h=>h.person===personId);
+      const blobbed = items.filter(h=>{
+        const blob=[h.text,h.trans,h.source, ...(h.tags||[])].filter(Boolean).join(' ').toLowerCase();
+        return blob.includes(q);
+      });
+      const wrap=document.getElementById('hadith-list');
+      wrap.innerHTML = blobbed.map(hadithToHTML).join('') || `<div class="card">نتیجه‌ای یافت نشد.</div>`;
+    }
+
+    function renderToday(){
+      const all=DATA.hadiths; if(!all.length) return;
+      const dayIndex=Math.floor(Date.now()/86400000)%all.length;
+      document.getElementById('today-hadith').innerHTML=hadithToHTML(all[dayIndex]);
+    }
+
+    function renderAzkar(){
+      const azkar=[
+        {day:'شنبه',dhikr:'سُبحانَ الله'},
+        {day:'یکشنبه',dhikr:'الحمدُ لله'},
+        {day:'دوشنبه',dhikr:'لا إلهَ إلّا الله'},
+        {day:'سه‌شنبه',dhikr:'اللهُ أکبر'},
+        {day:'چهارشنبه',dhikr:'لا حولَ و لا قوّةَ إلّا بالله'},
+        {day:'پنجشنبه',dhikr:'اللهمّ صَلِّ علی محمدٍ و آلِ محمد'},
+        {day:'جمعه',dhikr:'أستغفرُ اللهَ رَبّي وأتوبُ إلیه'},
+      ];
+      const wrap=document.getElementById('azkar-week');
+      const jsDay=new Date().getDay();
+      const todayName=['یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه'][(jsDay+6)%7];
+      wrap.innerHTML=azkar.map(x=>{
+        const isToday=x.day===todayName;
+        return `<div class="card" style="${isToday?'border:2px solid #fff':''}"><strong>${x.day}</strong><div style="margin-top:6px">${x.dhikr}</div>${isToday?'<div style="margin-top:6px;opacity:.9">ذکر امروز</div>':''}</div>`;
+      }).join('');
+    }
+
+    // ====== شروع ======
+    let currentPerson=null;
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.getElementById('year').textContent=new Date().getFullYear();
+      renderChips();
+      renderAzkar();
+      renderToday();
+      renderList(currentPerson, '');
+
+      document.getElementById('randomBtn').addEventListener('click', ()=>{
+        const all=DATA.hadiths; const i=Math.floor(Math.random()*all.length);
+        document.getElementById('today-hadith').innerHTML=hadithToHTML(all[i]);
+        document.getElementById('home').classList.add('highlight');
+        setTimeout(()=>document.getElementById('home').classList.remove('highlight'),700);
+      });
+      document.getElementById('copyBtn').addEventListener('click', async()=>{
+        const tmp=document.createElement('div');
+        tmp.innerHTML=document.getElementById('today-hadith').innerText;
+        await navigator.clipboard.writeText(tmp.innerText.trim());
+        alert('متن کپی شد ✅');
+      });
+      document.getElementById('search').addEventListener('input', e=>{
+        renderList(currentPerson, e.target.value);
+      });
+    });
+  </script>
+</body>
+</html>
